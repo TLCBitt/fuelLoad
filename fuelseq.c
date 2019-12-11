@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 
 int main(int argc, char *argv[])
@@ -8,8 +9,8 @@ int main(int argc, char *argv[])
 
     FILE *myFile;
     char fname[20];
-    float sum = 0;
-    int i, j, k =0;
+    //int sum = 0;
+    int i, j, k, tmp =0;
     int num = 0;
     int mass = 0;
     int count = 0;
@@ -23,11 +24,12 @@ int main(int argc, char *argv[])
     scanf("%s",fname);
 
     myFile = fopen(fname, "r");
- if(myFile == NULL)
+
+    if(myFile == NULL)
     {
         printf("Can't open file\n");
     }
-    while(1)
+ while(1)
     {
         ch = fgetc(myFile);
         if(ch == EOF)
@@ -48,16 +50,35 @@ int main(int argc, char *argv[])
             i++;
         }
     }
- for(i = 0; i < j; i++)
+    count = j;
+    int sum = 0;
+ for(i = 0; i < count; i++)
     {
-
+        sleep(1);
         fuel = M[i] / 4-3;
-        printf("Number [%d]: %d\n", i, M[i]);
-        printf("Fuel: %d\n", fuel);
-        //sum += fuel;
-    }
-    //printf("Total Fuel: %d\n", sum);
+        if(fuel >= 1)
+        {
+            printf("Number [%d]: %d\n", i, M[i]);
+            printf("Fuel: %d\n", fuel);
+            sum = sum + fuel;
+        }
+        else
+        {
+            fuel = 1;
+            printf("Number [%d]: %d\n", i, M[i]);
+            printf("Fuel: %d\n", fuel);
+            sum = sum + fuel;
+        }
 
-    //num = sum / 100;
-    //total = sum + (num * 10);
-    //printf("Fuel Load: %d\n", total);
+
+    }
+    printf("\n");
+    printf("Total Fuel: %d\n", sum);
+
+    num = sum / 100;
+    total = sum + (num * 10);
+    printf("\n");
+    printf("Fuel Load: %d\n\n", total);
+
+
+}
